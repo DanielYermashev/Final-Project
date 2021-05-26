@@ -26,7 +26,7 @@ public class GUI implements ActionListener {
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(400, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(panel);
 
         panel.setLayout(null);
@@ -68,6 +68,7 @@ public class GUI implements ActionListener {
         if (userName.equals("TeacherStaff") && password.equals("Library")) {
             logInfo.setText("Login Succesful");
             welcomePage();
+            
         } else {
             logInfo.setText("Incorrect Login Information");
         }
