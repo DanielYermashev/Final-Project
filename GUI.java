@@ -1,6 +1,7 @@
 package Final;
 
 import java.lang.ProcessHandle.Info;
+import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -66,10 +67,24 @@ public class GUI implements ActionListener {
 
         if (userName.equals("TeacherStaff") && password.equals("Library")) {
             logInfo.setText("Login Succesful");
+            welcomePage();
         } else {
             logInfo.setText("Incorrect Login Information");
         }
 
+    }
+
+    public static void welcomePage() {
+        JPanel panel = new JPanel();
+        JFrame frame = new JFrame();
+        frame.setSize(400, 400);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.add(panel);
+        panel.setLayout(null);
+        frame.setVisible(true);
+        
     }
 
 }
