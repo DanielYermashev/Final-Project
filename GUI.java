@@ -78,13 +78,70 @@ public class GUI implements ActionListener {
     public static void welcomePage() {
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
-        frame.setSize(400, 400);
+        frame.setSize(800, 700);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         frame.add(panel);
         panel.setLayout(null);
         frame.setVisible(true);
+        JLabel title;
+        title = new JLabel("Computer Schedule");
+        title.setBounds(200, 60, 200, 25);
+        panel.add(title);
+
+        JButton logOut;
+        logOut = new JButton("Log out");
+        logOut.setBounds(670, 20, 80, 25);
+        logOut.addActionListener(new GUI());
+        panel.add(logOut);
+
+        JButton manage;
+        manage = new JButton("Manage Computers");
+        manage.setBounds(520, 20, 150, 25);
+        manage.addActionListener(new GUI());
+        panel.add(manage);
+
+        JLabel book;
+        book = new JLabel("Book Computers");
+        book.setBounds(580, 240, 200, 25);
+        panel.add(book);
+
+        JLabel teacherName;
+        teacherName = new JLabel("Teacher Name:");
+        teacherName.setBounds(580, 270, 200, 25);
+        panel.add(teacherName);
+        
+        JTextField teacherNameText;
+        teacherNameText = new JTextField(20);
+        teacherNameText.setBounds(580, 290, 200, 25);
+        panel.add(teacherNameText);
+
+        JLabel roomNumber;
+        roomNumber = new JLabel("Room Number:");
+        roomNumber.setBounds(580, 310, 200, 25);
+        panel.add(roomNumber);
+
+        JTextField roomNumberText;
+        roomNumberText = new JTextField(20);
+        roomNumberText.setBounds(580, 330, 200, 25);
+        panel.add(roomNumberText);
+
+        JLabel numComputers;
+        numComputers = new JLabel("Number of Computers");
+        numComputers.setBounds(580, 350, 200, 25);
+        panel.add(numComputers);
+
+        JTextField numComputersText;
+        numComputersText = new JTextField(20);
+        numComputersText.setBounds(580, 370, 200, 25);
+        panel.add(numComputersText);
+
+        JButton bookComp;
+        bookComp = new JButton("Book");
+        bookComp.setBounds(580, 410, 200, 25);
+        bookComp.addActionListener(new GUI());
+        panel.add(bookComp);
         
     }
 
