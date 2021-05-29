@@ -96,12 +96,6 @@ public class GUI implements ActionListener {
         logOut.addActionListener(new GUI());
         panel.add(logOut);
 
-        JButton manage;
-        manage = new JButton("Manage Computers");
-        manage.setBounds(520, 20, 150, 25);
-        manage.addActionListener(new GUI());
-        panel.add(manage);
-
         JLabel book;
         book = new JLabel("Book Computers");
         book.setBounds(580, 240, 200, 25);
