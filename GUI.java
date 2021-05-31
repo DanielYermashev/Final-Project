@@ -80,7 +80,7 @@ public class GUI implements ActionListener {
     public static void welcomePage() {
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
-        frame.setSize(1000, 350);
+        frame.setSize(1000, 450);
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -109,39 +109,49 @@ public class GUI implements ActionListener {
         book.setBounds(800, 100, 200, 25);
         panel.add(book);
 
+        JLabel time;
+        time = new JLabel("Time:");
+        time.setBounds(750, 130, 200, 25);
+        panel.add(time);
+        
+        JTextField timeText;
+        timeText = new JTextField(20);
+        timeText.setBounds(750, 150, 200, 25);
+        panel.add(timeText);
+
         JLabel teacherName;
         teacherName = new JLabel("Teacher Name:");
-        teacherName.setBounds(750, 130, 200, 25);
+        teacherName.setBounds(750, 170, 200, 25);
         panel.add(teacherName);
         
         JTextField teacherNameText;
         teacherNameText = new JTextField(20);
-        teacherNameText.setBounds(750, 150, 200, 25);
+        teacherNameText.setBounds(750, 190, 200, 25);
         panel.add(teacherNameText);
 
         JLabel roomNumber;
         roomNumber = new JLabel("Room Number:");
-        roomNumber.setBounds(750, 170, 200, 25);
+        roomNumber.setBounds(750, 210, 200, 25);
         panel.add(roomNumber);
 
         JTextField roomNumberText;
         roomNumberText = new JTextField(20);
-        roomNumberText.setBounds(750, 190, 200, 25);
+        roomNumberText.setBounds(750, 230, 200, 25);
         panel.add(roomNumberText);
 
         JLabel numComputers;
         numComputers = new JLabel("Number of Computers");
-        numComputers.setBounds(750, 210, 200, 25);
+        numComputers.setBounds(750, 250, 200, 25);
         panel.add(numComputers);
 
         JTextField numComputersText;
         numComputersText = new JTextField(20);
-        numComputersText.setBounds(750, 230, 200, 25);
+        numComputersText.setBounds(750, 270, 200, 25);
         panel.add(numComputersText);
 
         JButton bookComp;
         bookComp = new JButton("Book");
-        bookComp.setBounds(800, 270, 100, 25);
+        bookComp.setBounds(800, 300, 100, 25);
         bookComp.addActionListener(new GUI());
         panel.add(bookComp);
 
