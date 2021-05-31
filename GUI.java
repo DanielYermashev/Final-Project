@@ -1,4 +1,4 @@
-package Final;
+//package Final;
 
 import java.lang.ProcessHandle.Info;
 import java.awt.Frame;
@@ -11,6 +11,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class GUI implements ActionListener {
 
@@ -78,65 +80,82 @@ public class GUI implements ActionListener {
     public static void welcomePage() {
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
-        frame.setSize(800, 700);
+        frame.setSize(1000, 350);
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         frame.add(panel);
         panel.setLayout(null);
         frame.setVisible(true);
+        
         JLabel title;
         title = new JLabel("Computer Schedule");
-        title.setBounds(200, 60, 200, 25);
+        title.setBounds(20, 70, 200, 25);
         panel.add(title);
+
+        JLabel available;
+        available = new JLabel("Computer's available today: 30"); // This is determined by a method which reads the csv file and counts how many are available. max being 30.
+        available.setBounds(548, 70, 200, 25);
+        panel.add(available);
 
         JButton logOut;
         logOut = new JButton("Log out");
-        logOut.setBounds(670, 20, 80, 25);
+        logOut.setBounds(865, 20, 80, 25);
         logOut.addActionListener(new GUI());
         panel.add(logOut);
 
         JLabel book;
         book = new JLabel("Book Computers");
-        book.setBounds(580, 240, 200, 25);
+        book.setBounds(800, 100, 200, 25);
         panel.add(book);
 
         JLabel teacherName;
         teacherName = new JLabel("Teacher Name:");
-        teacherName.setBounds(580, 270, 200, 25);
+        teacherName.setBounds(750, 130, 200, 25);
         panel.add(teacherName);
         
         JTextField teacherNameText;
         teacherNameText = new JTextField(20);
-        teacherNameText.setBounds(580, 290, 200, 25);
+        teacherNameText.setBounds(750, 150, 200, 25);
         panel.add(teacherNameText);
 
         JLabel roomNumber;
         roomNumber = new JLabel("Room Number:");
-        roomNumber.setBounds(580, 310, 200, 25);
+        roomNumber.setBounds(750, 170, 200, 25);
         panel.add(roomNumber);
 
         JTextField roomNumberText;
         roomNumberText = new JTextField(20);
-        roomNumberText.setBounds(580, 330, 200, 25);
+        roomNumberText.setBounds(750, 190, 200, 25);
         panel.add(roomNumberText);
 
         JLabel numComputers;
         numComputers = new JLabel("Number of Computers");
-        numComputers.setBounds(580, 350, 200, 25);
+        numComputers.setBounds(750, 210, 200, 25);
         panel.add(numComputers);
 
         JTextField numComputersText;
         numComputersText = new JTextField(20);
-        numComputersText.setBounds(580, 370, 200, 25);
+        numComputersText.setBounds(750, 230, 200, 25);
         panel.add(numComputersText);
 
         JButton bookComp;
         bookComp = new JButton("Book");
-        bookComp.setBounds(580, 410, 200, 25);
+        bookComp.setBounds(800, 270, 100, 25);
         bookComp.addActionListener(new GUI());
         panel.add(bookComp);
 
+        String data[][]={ {"9:00-10:00","Mr.ho","123", "25"},        //This is determined by a method. A method which reads the csv file and puts the according info into the array for which then is displayed on the GUI
+                          {"10:00-11:00","Mr.ubaid","305", "30"},    //This info is just being used as an example/placeholder
+                          {"11:00-12:00","Mr.Daniel","234", "20"}};   
+
+        String column[]={"Time","Teacher Name","Room Number", "Number of Computers"};     //This is a constant.    
+        
+        JTable compTable = new JTable(data, column);
+        JScrollPane scrollPane=new JScrollPane(compTable); 
+        scrollPane.setBounds(20,100,700,200);      
+        panel.add(scrollPane);             
+        
     }
 
 }
