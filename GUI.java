@@ -136,7 +136,7 @@ public class GUI implements ActionListener {
         bookComp.setBounds(580, 410, 200, 25);
         bookComp.addActionListener(new GUI());
         panel.add(bookComp);
-        
+
     }
 
 }
