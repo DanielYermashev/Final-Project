@@ -31,6 +31,7 @@ public class GUI implements ActionListener {
     private static JTextField roomNumberText;
     private static JLabel numComputers;
     private static JTextField numComputersText;
+    private static JFrame frame;
 
     public static void main(String[] args) {
 
@@ -91,8 +92,11 @@ public class GUI implements ActionListener {
                 bookOrNot.setText("Please Enter Information");
             }
             else{
-                 bookOrNot.setText("Computers Are Booked!!!");
+                 bookOrNot.setText("Computers Are Booked!!!"); //need to add method for verifiying the usr information
             }
+        }
+        if(action.equals("Log out")) {
+            System.exit(0);
         }
 
     }
