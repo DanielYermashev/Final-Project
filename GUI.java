@@ -22,6 +22,15 @@ public class GUI implements ActionListener {
     private static JPasswordField passText;
     private static JButton button;
     private static JLabel logInfo;
+    private static JLabel bookOrNot;
+    private static JLabel time;
+    private static JTextField timeText;
+    private static JLabel teacherName;
+    private static JTextField teacherNameText;
+    private static JLabel roomNumber;
+    private static JTextField roomNumberText;
+    private static JLabel numComputers;
+    private static JTextField numComputersText;
 
     public static void main(String[] args) {
 
@@ -62,17 +71,28 @@ public class GUI implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent ae) {
 
         String userName = userNameText.getText();
         String password = passText.getText();
+        String action = ae.getActionCommand();
 
-        if (userName.equals("TeacherStaff") && password.equals("Library")) {
+        if(action.equals("Login")) {
+            if (userName.equals("TeacherStaff") && password.equals("Library")) {
             logInfo.setText("Login Succesful");
-            welcomePage();
-            
-        } else {
-            logInfo.setText("Incorrect Login Information");
+            welcomePage();    
+            } 
+            else {
+             logInfo.setText("Incorrect Login Information");
+            }
+        }
+        if(action.equals("Book")) {
+            if(timeText.getText().isEmpty() || teacherNameText.getText().isEmpty() || roomNumberText.getText().isEmpty() || numComputersText.getText().isEmpty()) {
+                bookOrNot.setText("Please Enter Information");
+            }
+            else{
+                 bookOrNot.setText("Computers Are Booked!!!");
+            }
         }
 
     }
@@ -109,42 +129,41 @@ public class GUI implements ActionListener {
         book.setBounds(800, 100, 200, 25);
         panel.add(book);
 
-        JLabel time;
         time = new JLabel("Time:");
         time.setBounds(750, 130, 200, 25);
         panel.add(time);
         
-        JTextField timeText;
+        
         timeText = new JTextField(20);
         timeText.setBounds(750, 150, 200, 25);
         panel.add(timeText);
 
-        JLabel teacherName;
+        
         teacherName = new JLabel("Teacher Name:");
         teacherName.setBounds(750, 170, 200, 25);
         panel.add(teacherName);
         
-        JTextField teacherNameText;
+        
         teacherNameText = new JTextField(20);
         teacherNameText.setBounds(750, 190, 200, 25);
         panel.add(teacherNameText);
 
-        JLabel roomNumber;
+        
         roomNumber = new JLabel("Room Number:");
         roomNumber.setBounds(750, 210, 200, 25);
         panel.add(roomNumber);
 
-        JTextField roomNumberText;
+        
         roomNumberText = new JTextField(20);
         roomNumberText.setBounds(750, 230, 200, 25);
         panel.add(roomNumberText);
 
-        JLabel numComputers;
+        
         numComputers = new JLabel("Number of Computers");
         numComputers.setBounds(750, 250, 200, 25);
         panel.add(numComputers);
 
-        JTextField numComputersText;
+        
         numComputersText = new JTextField(20);
         numComputersText.setBounds(750, 270, 200, 25);
         panel.add(numComputersText);
@@ -154,6 +173,10 @@ public class GUI implements ActionListener {
         bookComp.setBounds(800, 300, 100, 25);
         bookComp.addActionListener(new GUI());
         panel.add(bookComp);
+
+        bookOrNot = new JLabel("");
+        bookOrNot.setBounds(780,320,200,25);
+        panel.add(bookOrNot);
 
         String data[][]={ {"9:00-10:00","Mr.ho","123", "25"},        //This is determined by a method. A method which reads the csv file and puts the according info into the array for which then is displayed on the GUI
                           {"10:00-11:00","Mr.ubaid","305", "30"},    //This info is just being used as an example/placeholder
