@@ -31,6 +31,7 @@ public class GUI implements ActionListener {
     private static JTextField roomNumberText;
     private static JLabel numComputers;
     private static JTextField numComputersText;
+    private static int computerNum;
 
     public static void main(String[] args) {
 
@@ -77,6 +78,7 @@ public class GUI implements ActionListener {
         String password = passText.getText();
         String action = ae.getActionCommand();
 
+
         if(action.equals("Login")) {
             if (userName.equals("TeacherStaff") && password.equals("Library")) {
             logInfo.setText("Login Succesful");
@@ -90,8 +92,20 @@ public class GUI implements ActionListener {
             if(timeText.getText().isEmpty() || teacherNameText.getText().isEmpty() || roomNumberText.getText().isEmpty() || numComputersText.getText().isEmpty()) {
                 bookOrNot.setText("Please Enter Information");
             }
-            else{
-                 bookOrNot.setText("Computers Are Booked!!!"); //need to add method for verifiying the usr information
+            else {
+                try {
+                    int num = Integer.parseInt(numComputersText.getText());
+
+                    if(num > computerNum || num <= 0) {
+                        bookOrNot.setText("Incorrect number of computers");
+                    }
+                    else{
+                        bookOrNot.setText("Computers Are Booked!!!"); //need to add method for verifiying the user information
+                    }
+                }
+                catch(Exception e) {
+                    bookOrNot.setText("Incorrect number of computers");
+                }
             }
         }
         if(action.equals("Log out")) {
@@ -117,7 +131,6 @@ public class GUI implements ActionListener {
         panel.add(title);
 
         JLabel available;
-        int computerNum = 0;
         computerNum = compNum(computerNum);
         available = new JLabel("Computer's available today: " + computerNum); // This is determined by a method which reads the csv file and counts how many are available. max being 30.
         available.setBounds(548, 70, 200, 25);
