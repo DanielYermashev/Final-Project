@@ -10,6 +10,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 public class GUI implements ActionListener {
 
@@ -114,7 +117,9 @@ public class GUI implements ActionListener {
         panel.add(title);
 
         JLabel available;
-        available = new JLabel("Computer's available today: 30"); // This is determined by a method which reads the csv file and counts how many are available. max being 30.
+        int computerNum = 0;
+        computerNum = compNum(computerNum);
+        available = new JLabel("Computer's available today: " + computerNum); // This is determined by a method which reads the csv file and counts how many are available. max being 30.
         available.setBounds(548, 70, 200, 25);
         panel.add(available);
 
@@ -193,6 +198,28 @@ public class GUI implements ActionListener {
         scrollPane.setBounds(20,100,700,250);      
         panel.add(scrollPane);             
         
+    }
+
+    public static int compNum(int computerNumber) {
+        try{
+            String filePath = "C://Users//Ubaid Khan//OneDrive//Desktop//computers.csv";
+            Scanner scan = new Scanner(new File(filePath));
+
+            int lineCounters = 0;
+
+            while(scan.hasNextLine()) {
+                String currentLine = scan.nextLine();
+                lineCounters = lineCounters + 1;
+                
+            }
+           
+            lineCounters = lineCounters - 1;
+            computerNumber = lineCounters;
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return computerNumber;
     }
 
 }
