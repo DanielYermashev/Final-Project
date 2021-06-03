@@ -178,18 +178,19 @@ public class GUI implements ActionListener {
         bookOrNot.setBounds(780,320,200,25);
         panel.add(bookOrNot);
 
-        String data[][]={ {"9:00-10:00","Mr.ho","123", ""},        //This is determined by a method. A method which reads the csv file and puts the according info into the array for which then is displayed on the GUI
+        String data[][]={ {"9:00-10:00","Mr.ho","123", "25"},        //This is determined by a method. A method which reads the csv file and puts the according info into the array for which then is displayed on the GUI
                           {"10:00-11:00","Mr.ubaid","305", "30"},    //This info is just being used as an example/placeholder
                           {"11:00-12:00","Mr.Daniel","234", "20"},
-                          {"12:00-1:00", " ", " ", ""},
-                          {"1:00-2:00"," "," ", ""},
-                          {"2:00-3:00", " ", " ", ""}};   
+                          {"12:00-1:00","","",""},
+                          {"1:00-2:00","","",""},
+                          {"2:00-3:00","","",""}
+                        };   
 
         String column[]={"Time","Teacher Name","Room Number", "Number of Computers"};     //This is a constant.    
         
         JTable compTable = new JTable(data, column);
         JScrollPane scrollPane=new JScrollPane(compTable); 
-        scrollPane.setBounds(20,100,700,500);      
+        scrollPane.setBounds(20,100,700,250);      
         panel.add(scrollPane);             
         
     }
