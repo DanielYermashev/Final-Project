@@ -202,7 +202,7 @@ public class GUI implements ActionListener {
 
     public static int compNum(int computerNumber) {
         try{
-            String filePath = "C://Users//Ubaid Khan//OneDrive//Desktop//computers.csv";
+            String filePath = "C://Users//Ubaid Khan//OneDrive//Desktop//computers.csv"; //need to add your file location
             Scanner scan = new Scanner(new File(filePath));
 
             int lineCounters = 0;
