@@ -1,7 +1,6 @@
 //package Final;
 
-import java.lang.ProcessHandle.Info;
-import java.awt.Frame;
+
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,8 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
@@ -31,7 +28,6 @@ public class GUI implements ActionListener {
     private static JTextField roomNumberText;
     private static JLabel numComputers;
     private static JTextField numComputersText;
-    private static JFrame frame;
 
     public static void main(String[] args) {
 
@@ -78,23 +74,24 @@ public class GUI implements ActionListener {
         String password = passText.getText();
         String action = ae.getActionCommand();
 
-        if (action.equals("Login")) {
+        if(action.equals("Login")) {
             if (userName.equals("TeacherStaff") && password.equals("Library")) {
-                logInfo.setText("Login Succesful");
-                welcomePage();
-            } else {
-                logInfo.setText("Incorrect Login Information");
+            logInfo.setText("Login Succesful");
+            welcomePage();    
+            } 
+            else {
+             logInfo.setText("Incorrect Login Information");
             }
         }
-        if (action.equals("Book")) {
-            if (timeText.getText().isEmpty() || teacherNameText.getText().isEmpty()
-                    || roomNumberText.getText().isEmpty() || numComputersText.getText().isEmpty()) {
+        if(action.equals("Book")) {
+            if(timeText.getText().isEmpty() || teacherNameText.getText().isEmpty() || roomNumberText.getText().isEmpty() || numComputersText.getText().isEmpty()) {
                 bookOrNot.setText("Please Enter Information");
-            } else {
-                bookOrNot.setText("Computers Are Booked!!!"); // need to add method for verifiying the usr information
+            }
+            else{
+                 bookOrNot.setText("Computers Are Booked!!!"); //need to add method for verifiying the usr information
             }
         }
-        if (action.equals("Log out")) {
+        if(action.equals("Log out")) {
             System.exit(0);
         }
 
@@ -110,16 +107,14 @@ public class GUI implements ActionListener {
         frame.add(panel);
         panel.setLayout(null);
         frame.setVisible(true);
-
+        
         JLabel title;
         title = new JLabel("Computer Schedule");
         title.setBounds(20, 70, 200, 25);
         panel.add(title);
 
         JLabel available;
-        available = new JLabel("Computer's available today: 30"); // This is determined by a method which reads the csv
-                                                                  // file and counts how many are available. max being
-                                                                  // 30.
+        available = new JLabel("Computer's available today: 30"); // This is determined by a method which reads the csv file and counts how many are available. max being 30.
         available.setBounds(548, 70, 200, 25);
         panel.add(available);
 
@@ -137,31 +132,38 @@ public class GUI implements ActionListener {
         time = new JLabel("Time:");
         time.setBounds(750, 130, 200, 25);
         panel.add(time);
-
+        
+        
         timeText = new JTextField(20);
         timeText.setBounds(750, 150, 200, 25);
         panel.add(timeText);
 
+        
         teacherName = new JLabel("Teacher Name:");
         teacherName.setBounds(750, 170, 200, 25);
         panel.add(teacherName);
-
+        
+        
         teacherNameText = new JTextField(20);
         teacherNameText.setBounds(750, 190, 200, 25);
         panel.add(teacherNameText);
 
+        
         roomNumber = new JLabel("Room Number:");
         roomNumber.setBounds(750, 210, 200, 25);
         panel.add(roomNumber);
 
+        
         roomNumberText = new JTextField(20);
         roomNumberText.setBounds(750, 230, 200, 25);
         panel.add(roomNumberText);
 
+        
         numComputers = new JLabel("Number of Computers");
         numComputers.setBounds(750, 250, 200, 25);
         panel.add(numComputers);
 
+        
         numComputersText = new JTextField(20);
         numComputersText.setBounds(750, 270, 200, 25);
         panel.add(numComputersText);
@@ -173,23 +175,23 @@ public class GUI implements ActionListener {
         panel.add(bookComp);
 
         bookOrNot = new JLabel("");
-        bookOrNot.setBounds(780, 320, 200, 25);
+        bookOrNot.setBounds(780,320,200,25);
         panel.add(bookOrNot);
 
-        String data[][] = { { "9:00-10:00", "Mr.ho", "123", "25" }, // This is determined by a method. A method which
-                                                                    // reads the csv file and puts the according info
-                                                                    // into the array for which then is displayed on the
-                                                                    // GUI
-                { "10:00-11:00", "Mr.ubaid", "305", "30" }, // This info is just being used as an example/placeholder
-                { "11:00-12:00", "Mr.Daniel", "234", "20" } };
+        String data[][]={ {"9:00-10:00","Mr.ho","123", ""},        //This is determined by a method. A method which reads the csv file and puts the according info into the array for which then is displayed on the GUI
+                          {"10:00-11:00","Mr.ubaid","305", "30"},    //This info is just being used as an example/placeholder
+                          {"11:00-12:00","Mr.Daniel","234", "20"},
+                          {"12:00-1:00", " ", " ", ""},
+                          {"1:00-2:00"," "," ", ""},
+                          {"2:00-3:00", " ", " ", ""}};   
 
-        String column[] = { "Time", "Teacher Name", "Room Number", "Number of Computers" }; // This is a constant.
-
+        String column[]={"Time","Teacher Name","Room Number", "Number of Computers"};     //This is a constant.    
+        
         JTable compTable = new JTable(data, column);
-        JScrollPane scrollPane = new JScrollPane(compTable);
-        scrollPane.setBounds(20, 100, 700, 200);
-        panel.add(scrollPane);
-
+        JScrollPane scrollPane=new JScrollPane(compTable); 
+        scrollPane.setBounds(20,100,700,500);      
+        panel.add(scrollPane);             
+        
     }
 
 }
