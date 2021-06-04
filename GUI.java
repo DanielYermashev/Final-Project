@@ -1,10 +1,17 @@
-//package Final;
+/*
+ * Name:Daniel, Muhammad, Ubaid, Williamson
+ * Teacher Name: Mr. Ho
+ * Date: June 4, 2021
+ * Description: This program allows users to efficiently and orgranize the booking of computers
+ * Details to run the program: Once you book computers, close the booking page but not the login page. Once you relogin your booking information would appear for the next person that wishes to book computers 
+*/
 
-
+//Import necessary packages
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -18,6 +25,7 @@ import java.io.FileWriter;
 
 class GUI implements ActionListener {
 
+    //Initializing necessary global variables
     private static JLabel userLabel;
     private static JTextField userNameText;
     private static JLabel passLabel;
@@ -34,16 +42,38 @@ class GUI implements ActionListener {
     private static JLabel numComputers;
     private static JTextField numComputersText;
     private static int computerNum;
-    private static String data[][] = {{"9:00-10:00","Mr.ho","123", "25"},        
-                                      {"10:00-11:00","Mr.ubaid","305", "30"},   
-                                      {"11:00-12:00","Mr.Muhammad","234", "20"},
+    private static String data[][] = {{"9:00-10:00","","", ""},        
+                                      {"10:00-11:00","","", ""},   
+                                      {"11:00-12:00","","", ""},
                                       {"12:00-1:00","","",""},
                                       {"1:00-2:00","","",""},
                                       {"2:00-3:00","","",""}
                                      };   
-
     public static void main(String[] args) {
+        //Display login page
+        loginPage();
+    }
 
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+
+        //Get which button was clicked
+        String action = ae.getActionCommand();
+
+        //If login button was clicked
+        if(action.equals("Login")) {
+            //get what username and password was inputed by the user
+            String userName = userNameText.getText();
+            String password = passText.getText();
+            //validate the username and password
+            validateLogin(userName, password);    
+        }
+        else if(action.equals("Book")) {
+            validateInfo();
+        }   
+    }
+
+    public static void loginPage() {
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(400, 400);
@@ -78,63 +108,6 @@ class GUI implements ActionListener {
         panel.add(logInfo);
 
         frame.setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-
-        String userName = userNameText.getText();
-        String password = passText.getText();
-        String action = ae.getActionCommand();
-        
-
-
-        if(action.equals("Login")) {
-            if (userName.equals("TeacherStaff") && password.equals("Library")) {
-            logInfo.setText("Login Succesful");
-            welcomePage();    
-            } 
-            else {
-             logInfo.setText("Incorrect Login Information");
-            }
-            userNameText.setText("");
-            passText.setText("");
-        }
-        if(action.equals("Book")) {
-            if(timeText.getText().isEmpty() || teacherNameText.getText().isEmpty() || roomNumberText.getText().isEmpty() || numComputersText.getText().isEmpty()) {
-                bookOrNot.setText("Please Enter Information");
-            }
-            else {
-                try {
-                    int num = Integer.parseInt(numComputersText.getText());
-
-                    if(num > computerNum || num <= 0) {
-                        bookOrNot.setText("Incorrect number of computers");
-                    }
-                    else{
-                        String bookTime = timeText.getText();
-                        String bookName = teacherNameText.getText();
-                        String bookRoom = roomNumberText.getText();
-                        String numBook = numComputersText.getText(); 
-                        
-                        String open = openSlot(data, bookTime, bookName, bookRoom, numBook);
-            
-                        if(open.equals("open")) {
-                           
-                            bookOrNot.setText("Computers Are Booked!!!"); 
-                            conformation(bookTime, bookName, bookRoom, numBook);
-                        }
-                        if(open.equals("closed")){
-                            bookOrNot.setText("Computers are not available for this time");
-                        }
-                        
-                    }
-                }
-                catch(Exception e) {
-                    bookOrNot.setText("Incorrect number of computers");
-                }
-            }
-        }
     }
 
     public static void welcomePage() {
@@ -215,6 +188,18 @@ class GUI implements ActionListener {
         
     }
 
+    public static void validateLogin(String userName, String password) {
+        if (userName.equals("TeacherStaff") && password.equals("Library")) {
+            logInfo.setText("Login Succesful");
+            welcomePage();    
+        } 
+        else {
+            logInfo.setText("Incorrect Login Information");
+        }
+        userNameText.setText("");
+        passText.setText("");
+    }
+
     public static int compNum(int computerNumber) {
         try{
             String filePath = "C://Users//Ubaid Khan//OneDrive//Desktop//computers.csv"; //need to add your file location
@@ -224,8 +209,7 @@ class GUI implements ActionListener {
 
             while(scan.hasNextLine()) {
                 String currentLine = scan.nextLine();
-                lineCounters = lineCounters + 1;
-                
+                lineCounters = lineCounters + 1;  
             }
            
             lineCounters = lineCounters - 1;
@@ -235,6 +219,43 @@ class GUI implements ActionListener {
             e.printStackTrace();
         }
         return computerNumber;
+    }
+
+    public static void validateInfo() {
+        if(timeText.getText().isEmpty() || teacherNameText.getText().isEmpty() || roomNumberText.getText().isEmpty() || numComputersText.getText().isEmpty()) {
+            bookOrNot.setText("Please Enter Information");
+        }
+        else {
+            try {
+                int num = Integer.parseInt(numComputersText.getText());
+
+                if(num > computerNum || num <= 0) {
+                    bookOrNot.setText("Incorrect number of computers");
+                }
+                else{
+                    String bookTime = timeText.getText();
+                    String bookName = teacherNameText.getText();
+                    String bookRoom = roomNumberText.getText();
+                    String numBook = numComputersText.getText(); 
+                    
+                    String open = openSlot(data, bookTime, bookName, bookRoom, numBook);
+        
+                    if(open.equals("open")) {
+                       
+                        bookOrNot.setText("Computers Are Booked!!!"); 
+                        conformation(bookTime, bookName, bookRoom, numBook);
+                        JOptionPane.showMessageDialog(null, "There should be a conformation CSV file on your desktop", "Conformation", JOptionPane.PLAIN_MESSAGE);
+                    }
+                    if(open.equals("closed")){
+                        bookOrNot.setText("Computers are not available for this time");
+                    }
+                    
+                }
+            }
+            catch(Exception e) {
+                bookOrNot.setText("Incorrect number of computers");
+            }
+        }
     }
 
     public static String openSlot(String data[][], String bookTime, String bookName, String bookRoom, String numBook) {
