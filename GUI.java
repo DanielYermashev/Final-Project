@@ -246,7 +246,7 @@ class GUI implements ActionListener {
     }
 
     /**
-     * Description:
+     * Description: Method that reads the computers.csv file
      * 
      * @param computerNumber the computer number
      * @return the computer number
