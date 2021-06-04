@@ -49,6 +49,8 @@ class GUI implements ActionListener {
                                       {"1:00-2:00","","",""},
                                       {"2:00-3:00","","",""}
                                      };   
+
+
     public static void main(String[] args) {
         //Display login page
         loginPage();
@@ -56,7 +58,6 @@ class GUI implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-
         //Get which button was clicked
         String action = ae.getActionCommand();
 
@@ -120,7 +121,7 @@ class GUI implements ActionListener {
         frame.add(panel);
         panel.setLayout(null);
         frame.setVisible(true);
-        
+
         JLabel title;
         title = new JLabel("Computer Schedule");
         title.setBounds(20, 70, 200, 25);
@@ -128,7 +129,9 @@ class GUI implements ActionListener {
 
         JLabel available;
         computerNum = compNum(computerNum);
-        available = new JLabel("Computer's available today: " + computerNum); // This is determined by a method which reads the csv file and counts how many are available. max being 30.
+        available = new JLabel("Computer's available today: " + computerNum); 
+                                                                              
+                                                                              
         available.setBounds(548, 70, 200, 25);
         panel.add(available);
 
@@ -140,15 +143,15 @@ class GUI implements ActionListener {
         time = new JLabel("Time:");
         time.setBounds(750, 130, 200, 25);
         panel.add(time);
-        
+
         timeText = new JTextField(20);
         timeText.setBounds(750, 150, 200, 25);
         panel.add(timeText);
-  
+
         teacherName = new JLabel("Teacher Name:");
         teacherName.setBounds(750, 170, 200, 25);
         panel.add(teacherName);
-        
+
         teacherNameText = new JTextField(20);
         teacherNameText.setBounds(750, 190, 200, 25);
         panel.add(teacherNameText);
@@ -164,7 +167,7 @@ class GUI implements ActionListener {
         numComputers = new JLabel("Number of Computers");
         numComputers.setBounds(750, 250, 200, 25);
         panel.add(numComputers);
-        
+
         numComputersText = new JTextField(20);
         numComputersText.setBounds(750, 270, 200, 25);
         panel.add(numComputersText);
@@ -176,16 +179,16 @@ class GUI implements ActionListener {
         panel.add(bookComp);
 
         bookOrNot = new JLabel("");
-        bookOrNot.setBounds(730,320,300,25);
-        panel.add(bookOrNot);  
+        bookOrNot.setBounds(730, 320, 300, 25);
+        panel.add(bookOrNot);
 
-        String column[]={"Time","Teacher Name","Room Number", "Number of Computers"};     //This is a constant.    
-        
+        String column[] = { "Time", "Teacher Name", "Room Number", "Number of Computers" }; // This is a constant.
+
         JTable compTable = new JTable(data, column);
-        JScrollPane scrollPane=new JScrollPane(compTable); 
-        scrollPane.setBounds(20,100,700,250);      
-        panel.add(scrollPane);             
-        
+        JScrollPane scrollPane = new JScrollPane(compTable);
+        scrollPane.setBounds(20, 100, 700, 250);
+        panel.add(scrollPane);
+
     }
 
     public static void validateLogin(String userName, String password) {
@@ -201,21 +204,21 @@ class GUI implements ActionListener {
     }
 
     public static int compNum(int computerNumber) {
-        try{
-            String filePath = "C://Users//Ubaid Khan//OneDrive//Desktop//computers.csv"; //need to add your file location
+        try {
+            String filePath = "C://Users//Ubaid Khan//OneDrive//Desktop//computers.csv"; // need to add your file
+                                                                                         // location
             Scanner scan = new Scanner(new File(filePath));
 
             int lineCounters = 0;
 
-            while(scan.hasNextLine()) {
+            while (scan.hasNextLine()) {
                 String currentLine = scan.nextLine();
-                lineCounters = lineCounters + 1;  
+                lineCounters = lineCounters + 1;
             }
-           
+
             lineCounters = lineCounters - 1;
             computerNumber = lineCounters;
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return computerNumber;
@@ -261,9 +264,10 @@ class GUI implements ActionListener {
     public static String openSlot(String data[][], String bookTime, String bookName, String bookRoom, String numBook) {
         String book = "closed";
 
-        for(int i = 0; i < 6; i++) {
-            for(int j = 0; j < 4; j++) {
-                if(data[i][j].equals(bookTime) && data[i][1].equals("") && data[i][2].equals("") && data[i][3].equals("")) {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (data[i][j].equals(bookTime) && data[i][1].equals("") && data[i][2].equals("")
+                        && data[i][3].equals("")) {
                     data[i][1] = bookName;
                     data[i][2] = bookRoom;
                     data[i][3] = numBook;
@@ -273,16 +277,16 @@ class GUI implements ActionListener {
         }
         return book;
     }
+
     public static void conformation(String bookTime, String bookName, String bookRoom, String numBook) {
         String fileLocation = "C://Users//Ubaid Khan//OneDrive//Desktop//conformation.csv";
 
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileLocation));
             bw.write("Time, Name, Room Number, Number of Computers \n");
-            bw.write(bookTime + "," + bookName + "," + bookRoom +"," + numBook);
+            bw.write(bookTime + "," + bookName + "," + bookRoom + "," + numBook);
             bw.close();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
